@@ -234,7 +234,8 @@ der TAG ablauf
         //DER TAG
         //TODO
         do{
-
+            DGOD game = new DGOD(0,0,beeteListe);
+            game.getTag();
         }while(true);
     }
 
