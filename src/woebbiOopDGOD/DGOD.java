@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class DGOD {
     private int punkteStand;
@@ -215,7 +216,7 @@ der TAG ablauf
         //neue Beete erstellen und in beeteListe werfen
         Beet[] beeteListe = new Beet[5];
         for (int i = 0; i < beeteListe.length; i++) {
-            beeteListe[i] = new Beet(i, blumenBeeteListe[i]);
+            beeteListe[i] = new Beet(i+1, blumenBeeteListe[i]);
         }
         System.out.println("\n");
 
@@ -244,22 +245,70 @@ der TAG ablauf
             //
             //Beete mit blumen ausgeben
             //
-
             for (int i = 0; i < beeteListe.length; i++) {
                 System.out.println("Beet " + beeteListe[i].getNummer());
                 for (int j = 0; j < beeteListe[i].getBlumeListe().length; j++) {
-                    try {
+                    try {//ausgabe (0) Schmuckkoerbchen [9/27] (Verbrauch: 3)
                         System.out.println("("+ beeteListe[i].getBlumeListe()[j].getBlumenArt().getNummer() + ") " + beeteListe[i].getBlumeListe()[j].getBlumenArt().getName() + " [" + beeteListe[i].getBlumeListe()[j].getAktVorrat() + "/" + beeteListe[i].getBlumeListe()[j].getBlumenArt().getMaximalVorrat() + "] (Verbrauch: " + beeteListe[i].getBlumeListe()[j].getBlumenArt().getTagesVerbrauch() + ")");
                     } catch (NullPointerException e) {
                         // TODO: handle exception
                     }
                 }
+                System.out.println("---");
             }
+
+            //
+            //Jetzt wird gegossen
+            //
+            Scanner scanner = new Scanner(System.in);
+            for (int i = 0; i < beeteListe.length; i++) {
+                System.out.println("Möchtest du Beet " + beeteListe[i].getNummer() + "gießen (Wassermenge: " + GIESSKANNEGROESSE + "? (1 für Ja, sonst nein)");
+                //Eingabe Prüfen ob 1 ist und gegossen werden muss/(wir
+                String input = scanner.next();
+                if(!input.equals("1")){
+
+                }else {
+                    for (int j = 0; j < beeteListe[i].getBlumeListe().length; j++) {
+                        try {//BlumenListe durchlaufen, pro blume gießen
+                            beeteListe[i].giessen();
+                        } catch (NullPointerException e) {
+                            // TODO: handle exception
+                        }
+                    }
+                    System.out.println("---");
+                }
+            }
+            scanner.close();
+            // 2. Phase - Spielablauf
+            //++Fußgesteuerte Schleife Do while()++
+            //++	Tag ausgeben (Spiel.tag)
+            //++	Ausgabe aller Beete mit/ohne Blumen
+            //		Schleife über alle Beete
+            //			Abfrage ob Beet Wasser bekommt
+            //			Auswerten der Bedingung Ja oder Nein
+            //			Ja
+            //				GIESSEN aller Blumen pro Beet, prüfen ob Blumen noch am Leben sind
+            //				Ausgabe bei sterbenden Blumen
+            //			Nein -> nix
+            //
+            //		Ende Beet Schleife
+            //		Ausgabe aller Beete mit/ohne Blumen
+            //		Abfrage zum Bienchenstart -> Ja / Nein
+            //		JA
+            //			Abfrage Start UND Zielbeet
+            //			Prüfen ob neue Blumen entstehen und ggf. hinzufügen
+            //			Ausgabe bei neuen Blumen
+            //		Nein nix
+            //		Abfrage ob Tag beenden oder Spiel beenden
+            //
+            // Ende Schleife und prüfen der Bedingung (Benutzerabbruch, 60 Tage, alle Beete ohne Blumen)
+
+
 
         /*
             ++ tag nummer ausgeben ++
-            beete mit den blumen(wenn vorhanden)
-            blumen füllstand angeben
+            ++ beete mit den blumen(wenn vorhanden) ++
+
             schleife für beet ob geißen
             abfrage ov gegegngen werden soll
             auswertung ob ja oder nein
