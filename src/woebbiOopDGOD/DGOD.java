@@ -234,12 +234,30 @@ der TAG ablauf
         //DER TAG
         //TODO
         DGOD game = new DGOD(0,0,beeteListe);
+        boolean laeuft = true;
         do{
             //Ein neuer Tag beginnt
             game.setTag(game.getTag() + 1);
-            System.out.println(game.getTag());
+            System.out.println("Tag " + game.getTag() + " bricht an!");
+            System.out.println("Deine Beete sehen aktuell so aus:");
+
+            //
+            //Beete mit blumen ausgeben
+            //
+
+            for (int i = 0; i < beeteListe.length; i++) {
+                System.out.println("Beet " + beeteListe[i].getNummer());
+                for (int j = 0; j < beeteListe[i].getBlumeListe().length; j++) {
+                    try {
+                        System.out.println("("+ beeteListe[i].getBlumeListe()[j].getBlumenArt().getNummer() + ") " + beeteListe[i].getBlumeListe()[j].getBlumenArt().getName() + " [" + beeteListe[i].getBlumeListe()[j].getAktVorrat() + "/" + beeteListe[i].getBlumeListe()[j].getBlumenArt().getMaximalVorrat() + "] (Verbrauch: " + beeteListe[i].getBlumeListe()[j].getBlumenArt().getTagesVerbrauch() + ")");
+                    } catch (NullPointerException e) {
+                        // TODO: handle exception
+                    }
+                }
+            }
+
         /*
-            tag nummer ausgeben
+            ++ tag nummer ausgeben ++
             beete mit den blumen(wenn vorhanden)
             blumen füllstand angeben
             schleife für beet ob geißen
@@ -254,8 +272,8 @@ der TAG ablauf
             nein:
 */
 
-
-        }while(game.getTag() < TAGEBISARMAGEDDON);
+        if(game.getTag() >= TAGEBISARMAGEDDON) laeuft = false;
+        }while(laeuft);
     }
 
 
