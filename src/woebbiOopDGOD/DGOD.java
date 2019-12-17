@@ -233,10 +233,29 @@ der TAG ablauf
         //
         //DER TAG
         //TODO
+        DGOD game = new DGOD(0,0,beeteListe);
         do{
-            DGOD game = new DGOD(0,0,beeteListe);
-            game.getTag();
-        }while(true);
+            //Ein neuer Tag beginnt
+            game.setTag(game.getTag() + 1);
+            System.out.println(game.getTag());
+        /*
+            tag nummer ausgeben
+            beete mit den blumen(wenn vorhanden)
+            blumen füllstand angeben
+            schleife für beet ob geißen
+            abfrage ov gegegngen werden soll
+            auswertung ob ja oder nein
+            ja: gißen, aller blume pro beet , prüfen ob ertrunken
+            nein:foo
+                    endsvhleife
+            abfrage ob bienschawr, kommmt
+            ja:
+            abfrage start und ziel beet
+            nein:
+*/
+
+
+        }while(game.getTag() < TAGEBISARMAGEDDON);
     }
 
 
